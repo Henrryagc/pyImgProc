@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" />
+  <link rel="stylesheet" href="{{url_for('static', filename='css/materialize.css')}}" />
+  <link rel="stylesheet" href="{{url_for('static', filename='css/materialize.min.css')}}" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <title>{{title}}</title>
+</head>
+
+<body class="cyan darken-4">
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">This is {{title}}</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="#">Sass</a></li>
+        <li><a href="#">Components</a></li>
+        <li><a href="#">JavaScript</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  {% include 'body.html' %}
+
+    <div class="row">
+      <form method="post" action="/" enctype="multipart/form-data">
+      <div class="col s6">
+        <div class="card">
+          <div class="card-content">
+            <div class="file-field input-field">
+              <div class="btn">
+                <span>SUBIR IMAGEN</span>
+                <input type="file" name="file" autocomplete="off" required>
+                <i class="material-icons left">panorama</i>
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text" placeholder="Sube una imagen para procesar">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-content">
+            <p class="flow-text" style="margin-bottom: .5em;">Marque los filtros a aplicar</p>
+            <p>
+              <input type="checkbox" id="test1" />
+              <label for="test1">Filtro 1</label>
+            </p>
+            <p>
+              <input type="checkbox" id="test2" />
+              <label for="test2">Red</label>
+            </p>
+            <p>
+              <input type="checkbox" id="test3" />
+              <label for="test3">Red</label>
+            </p>
+            <p>
+              <input name="test4" type="checkbox" id="test4" />
+              <label for="test4">Red</label>
+            </p>
+            <p style="margin-top: 1em;">
+              <button type="submit" class="btn blue darken-4 waves-effect">Evaluar</button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </form>
+      <div class="col s6">
+        <div class="card">
+          <div class="card-content">
+            <ul id="tabs-swipe-demo" class="tabs tabs-fixed-width">
+              <li class="tab col s3"><a class="active" href="#test-swipe-1">Test 1</a></li>
+              <li class="tab col s3"><a href="#test-swipe-2">Test 2</a></li>
+              <li class="tab col s3"><a href="#test-swipe-3">Test 3</a></li>
+            </ul>
+            {% if img_names %}
+              {% for imgname in img_names %}
+                <div id="test-swipe-{{loop.index}}">
+                  <img src="{{ url_for('display_image', filename=imgname) }}" width="350">
+                  <span class="card-title">Card Title</span>
+                </div>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="container">
+    <h2>Select a file to upload</h2>
+    <p>
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+    <ul class=flashes style="width: 50%;">
+      {% for message in messages %}
+      <li class="blue darken-4 pulse">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    </p>
+    {% if filename %}
+    <div>
+      <img src="{{ url_for('display_image', filename=filename) }}" width="350">
+    </div>
+    {% endif %}
+  </div>
+
+
+  <script src="{{ url_for('static', filename = 'js/jquery.js') }}"></script>
+  <script src="{{ url_for('static', filename = 'js/materialize.js') }}"></script>
+  <script src="{{ url_for('static', filename = 'js/materialize.min.js') }}"></script>
+  <script src="{{ url_for('static', filename = 'js/main.js') }}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+/* * {
+    margin: 0;
+    padding: 0;
+}*/
+
+nav {
+    width: 100%;
+}
+
+
+/**
+*/
+
+.main {
+    height: 150px;
+    background: coral;
+}
